@@ -1,0 +1,70 @@
+<plugin_info>
+    <plugin_name>Debug Export</plugin_name>
+    <plugin_dir>.</plugin_dir>
+    <plugin_description>A plugin that records input parameters and spends some time doing nothing. It can be used to thest a job queue.</plugin_description>
+    <plugin_category>export</plugin_category>
+    <plugin_command>export.py</plugin_command>
+    <plugin_shell>python</plugin_shell>
+    <plugin_location>.</plugin_location>
+    <plugin_namespace>debug</plugin_namespace>
+    <plugin_nativelogextension>log</plugin_nativelogextension>
+    <plugin_nativeoutputextension>out</plugin_nativeoutputextension>
+    <plugin_epilog>
+        Written by Stephen Knox (stephen.knox@manchester.ac.uk)
+        For more information visit www.hydraplatform.org
+    </plugin_epilog>
+    <smallicon></smallicon>
+    <largeicon></largeicon>
+    <mandatory_args>
+        <arg>
+            <name>network-id</name>
+            <switch>--network-id</switch>
+            <multiple>N</multiple>
+            <argtype>network</argtype>
+            <help>Id of the network the plugin is pretending to work on.</help>
+        </arg>
+        <arg>
+            <name>scenario-id</name>
+            <switch>--scenario-id</switch>
+            <multiple>N</multiple>
+            <argtype>scenario</argtype>
+            <help>The id of the scenario(s) used.</help>
+        </arg>
+    </mandatory_args>
+    <non_mandatory_args>
+        <arg>
+            <name>dummy1</name>
+            <switch>--dummy1</switch>
+            <multiple>N</multiple>
+            <argtype>string</argtype>
+            <help>A non-mandatory dummy argument (string).</help>
+        </arg>
+        <arg>
+            <name>dummy2</name>
+            <switch>--dummy2</switch>
+            <multiple>N</multiple>
+            <argtype>number</argtype>
+            <help>A non-mandatory dummy argument with a default value.</help>
+            <defaultval>4</defaultval>
+        </arg>
+        <arg>
+            <name>dummy3</name>
+            <switch>--dummy3</switch>
+            <multiple>N</multiple>
+            <argtype>number</argtype>
+            <help>A non-mandatory dummy argument (number).</help>
+        </arg>
+    </non_mandatory_args> 
+    <switches>
+        <arg>
+            <switch>--switch-on</switch>
+            <name>dummyswitch</name>
+            <help>A dummy switch</help>
+        </arg>
+        <arg>
+            <switch>--fail</switch>
+            <name>failswitch</name>
+            <help>The plugin fails if this switch is used.</help>
+        </arg>
+    </switches>
+</plugin_info>

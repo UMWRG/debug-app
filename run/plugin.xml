@@ -1,0 +1,45 @@
+<plugin_info>
+    <plugin_name>Debug Run Model</plugin_name>
+    <plugin_dir>.</plugin_dir>
+    <plugin_description>A plugin that records input parameters and spends some time doing nothing. It can be used to thest a job queue.</plugin_description>
+    <plugin_category>model</plugin_category>
+    <plugin_command>run.py</plugin_command>
+    <plugin_shell>python</plugin_shell>
+    <plugin_location>.</plugin_location>
+    <plugin_namespace>debug</plugin_namespace>
+    <plugin_nativelogextension>log</plugin_nativelogextension>
+    <plugin_nativeoutputextension>out</plugin_nativeoutputextension>
+    <plugin_epilog>
+        Written by Philipp Meier (philipp.meier@eawag.ch)
+        (c) Copyright 2017, Eawag.
+        For more information visit www.hydraplatform.org
+    </plugin_epilog>
+    <smallicon></smallicon>
+    <largeicon></largeicon>
+    <mandatory_args>
+        <arg>
+            <name>network-id</name>
+            <switch>--network-id</switch>
+            <multiple>N</multiple>
+            <argtype>network</argtype>
+            <help>Id of the network the plugin is pretending to work on.</help>
+        </arg>
+    </mandatory_args>
+    <non_mandatory_args>
+        <arg>
+            <name>timeout</name>
+            <switch>--timeout</switch>
+            <multiple>N</multiple>
+            <argtype>number</argtype>
+            <help>How long to sleep for</help>
+            <defaultval>4</defaultval>
+        </arg>
+    </non_mandatory_args> 
+    <switches>
+        <arg>
+            <switch>--fail</switch>
+            <name>failswitch</name>
+            <help>The plugin fails if this switch is used.</help>
+        </arg>
+    </switches>
+</plugin_info>
