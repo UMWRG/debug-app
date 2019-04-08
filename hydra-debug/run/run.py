@@ -1,14 +1,6 @@
-import hydra_base as hb
 import click
-
-import hydra_base as hb
-import click
-import os
-import json
-import logging
 
 from time import sleep
-
 
 @click.command()
 @click.option('-n',  '--network-id', help='Project ID')
