@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 setup(
     name='hydra-debug',
-    version='0.1',
-    description='Hydra client that does nothing, for debug purposes', 
+    version='0.2',
+    description='Hydra App used for debug purposes.', 
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
