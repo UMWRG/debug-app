@@ -1,4 +1,4 @@
-from time import sleep
+from time import sleep, time
 from hydra_client import write_progress
 import multiprocessing
 from random import randint
@@ -10,6 +10,8 @@ def do_run(network_id, timeout=5, fail=False, heavy_load=False):
     runner = Runner()
     if heavy_load is True:
         runner._do_heavy_load()
+    elif fail is True:
+        runner._fail()
     else:
         runner.wait(timeout)
 
@@ -18,11 +20,14 @@ class Runner(object):
         pass
 
     def wait(self, timeout):
-        write_progress(1, 2)
-        if fail is True:
-            raise Exception("User-forced failure")
-        sleep(int(timeout))
-        write_progress(2, 2)
+        #write_progress(1, 2)
+        for i in range(0, timeout):
+            sleep(1)
+            write_progress(i+1, timeout)
+
+    def _do_fail(self):
+        #write_progress(1, 2)
+        raise Exception("User-forced failure")
 
     def _do_heavy_load(self):
         mpc=multiprocessing.cpu_count()
@@ -45,7 +50,15 @@ class Runner(object):
         a=0
         st=100000000
         limit=randint(st / 10,2*st)
+
+        start_time=time()
+
         while a<limit:
             a = a + 1
+            current_time=time()
+            if current_time > start_time+1:
+                print(process.name)
+                write_progress(a, limit)
+                start_time=current_time
 
         print("End Process {} for a total of {} cycles".format(str(process.name),a))
