@@ -20,18 +20,17 @@ class Runner(object):
         pass
 
     def wait(self, timeout):
-        write_ouput("Waiting {0} seconds".format(timeout))
+        write_output("Waiting {0} seconds".format(timeout))
         for i in range(0, timeout):
             sleep(1)
             write_progress(i+1, timeout)
-        write_ouput("Waiting Complete")
+        write_output("Waiting Complete")
 
     def fail(self):
-        write_ouput("Forcing a user-defined failure")
+        write_output("Forcing a user-defined failure")
         raise Exception("User-forced failure")
 
     def do_heavy_load(self):
-        mpc=multiprocessing.cpu_count()
 
         processes=[]
         for i in range(0,4):
