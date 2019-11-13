@@ -7,7 +7,7 @@ class Object(object):
     pass
 
 def do_run(network_id, timeout=5, fail=False, heavy_load=False):
-    runner = Runner()
+    runner = Runner(network_id)
     if heavy_load is True:
         runner._do_heavy_load()
     elif fail is True:
@@ -16,8 +16,8 @@ def do_run(network_id, timeout=5, fail=False, heavy_load=False):
         runner.wait(timeout)
 
 class Runner(object):
-    def __init__(self):
-        pass
+    def __init__(self, network_id = 0):
+        self.network_id = network_id
 
     def wait(self, timeout):
         #write_progress(1, 2)
@@ -27,7 +27,7 @@ class Runner(object):
 
     def _do_fail(self):
         #write_progress(1, 2)
-        raise Exception("User-forced failure")
+        raise Exception("[Network ID: {}] - User-forced failure".format(self.network_id))
 
     def _do_heavy_load(self):
         mpc=multiprocessing.cpu_count()
@@ -37,7 +37,7 @@ class Runner(object):
             process = Object()
             process.name = "process_{}".format(i)
 
-            processes.append(multiprocessing.Process(name=process.name, target=self._run_process, args=(process,)))
+            processes.append(multiprocessing.Process(name=process.name, target=self._run_loop_process, args=(process,)))
 
         for p in processes:
             p.start()
@@ -45,8 +45,8 @@ class Runner(object):
         for p in processes:
             p.join()
 
-    def _run_process(self, process=None):
-        print("v.0.2 - Running "+ str(process.name))
+    def _run_loop_process(self, process=None):
+        print("[Network ID: {}] v.0.2 - Running {}".format(self.network_id, process.name))
         a=0
         st=100000000
         limit=randint(st / 10,2*st)
@@ -61,4 +61,4 @@ class Runner(object):
                 write_progress(a, limit)
                 start_time=current_time
 
-        print("End Process {} for a total of {} cycles".format(str(process.name),a))
+        print("[Network ID: {}] End Process {} for a total of {} cycles".format(self.network_id, str(process.name),a))
