@@ -1,5 +1,5 @@
 from time import sleep, time
-from hydra_client import write_progress
+from hydra_client import write_progress, write_output
 import multiprocessing
 from random import randint
 
@@ -9,9 +9,9 @@ class Object(object):
 def do_run(network_id, timeout=5, fail=False, heavy_load=False):
     runner = Runner(network_id)
     if heavy_load is True:
-        runner._do_heavy_load()
+        runner.do_heavy_load()
     elif fail is True:
-        runner._fail()
+        runner.fail()
     else:
         runner.wait(timeout)
 
@@ -20,17 +20,17 @@ class Runner(object):
         self.network_id = network_id
 
     def wait(self, timeout):
-        #write_progress(1, 2)
+        write_output("Waiting {0} seconds".format(timeout))
         for i in range(0, timeout):
             sleep(1)
             write_progress(i+1, timeout)
+        write_output("Waiting Complete")
 
-    def _do_fail(self):
-        #write_progress(1, 2)
+    def fail(self):
+        write_output("Forcing a user-defined failure")
         raise Exception("[Network ID: {}] - User-forced failure".format(self.network_id))
 
-    def _do_heavy_load(self):
-        mpc=multiprocessing.cpu_count()
+    def do_heavy_load(self):
 
         processes=[]
         for i in range(0,4):

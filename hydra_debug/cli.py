@@ -1,5 +1,5 @@
 import click
-from hydra_debug import exporter, importer, run
+from hydra_debug import exporter, importer, run, network_utility
 from hydra_client.click import hydra_app, make_plugins, write_plugins
 
 @click.group()
@@ -19,8 +19,8 @@ def cli(obj, username, password, hostname, session):
 def start_cli():
     cli(obj={}, auto_envvar_prefix='HYDRA_DEBUG')
 
-@hydra_app(category='export')
-@cli.command(name='debug-app-export')
+@hydra_app(category='export', name="Debug Export")
+@cli.command(name='export')
 @click.pass_obj
 @click.option('-n',  '--network-id', help='Network ID')
 @click.option('-s',  '--scenario-id', help='Scenario ID')
@@ -34,8 +34,8 @@ def do_export(obj, network_id, scenario_id, dummy1, dummy2, dummy3, switch_on, f
 
     exporter.do_export(network_id, scenario_id, dummy1, dummy2, dummy3, switch_on, fail, data_dir)
 
-@hydra_app(category='import')
-@cli.command(name='debug-app-import')
+@hydra_app(category='import', name="Debug Import")
+@cli.command(name='import')
 @click.pass_obj
 @click.option('-p',  '--project-id', help='Project ID')
 @click.option('-f', '--data-file', help="Data File")
@@ -49,8 +49,8 @@ def do_import(obj, project_id, data_file, dummy1, dummy2, dummy3, switch_on, fai
 
     importer.do_import(project_id, data_file, dummy1, dummy2, dummy3, switch_on, fail, data_dir)
 
-@hydra_app(category='model')
-@cli.command(name='debug-app-run')
+@hydra_app(category='model', name="Debug Run")
+@cli.command(name='run')
 @click.pass_obj
 @click.option('-n',  '--network-id', help='Network ID')
 @click.option('-t', '--timeout', default=5, help='How log to sleep for')
@@ -60,24 +60,34 @@ def do_run(obj, network_id, timeout, fail, heavy_load):
 
     run.do_run(network_id, timeout, fail, heavy_load)
 
-# @cli.command()
-# @click.pass_obj
-# @click.option('--all', is_flag=True, help='By default only the Export, Run, Import is registered. This flag registers the import, export and auto apps')
-# def register(obj, all=False):
-#
-#     run.register()
-#
-#     if all is True:
-#         importer.register()
-#         exporter.register()
+@hydra_app(category='network_utility', name="Debug Network Utility")
+@cli.command(name='netutil')
+@click.pass_obj
+@click.option('-n',  '--network-id', help='Network ID')
+@click.option('-s',  '--scenario-id', help='Scenario ID')
+@click.option('-t', '--timeout', default=5, help='How log to sleep for')
+@click.option('--fail', 'fail', flag_value=True)
+def do_run(obj, network_id, scenario_id, timeout, fail):
+    """
+        An app with mainly similar functionality to the 'run' (pauses for a few seconds)
+        except that it is in the 'network_utility' category, which allows it to be
+        placed in a dedicated place in side HWI. Examples of use would be to update
+        all the nodes in an existing network, upload partial data (for example updating all
+        inflows) etc.
+    """
 
-
+    network_utility.do_run(network_id, scenario_id, timeout, fail)
 
 @cli.command()
 @click.pass_obj
-@click.argument('docker-image', type=str)
+@click.argument('docker-image', type=str, required=False)
 def register(obj, docker_image):
     """ Register the app with the Hydra installation. """
-    plugins = make_plugins(cli, 'hydra-debug', docker_image=docker_image)
-    app_name = docker_image.replace('/', '-').replace(':', '-')
+    app_name = 'hydra-debug'
+
+    if docker_image:
+        plugins = make_plugins(cli, 'hydra-debug', docker_image=docker_image)
+    else:
+        plugins = make_plugins(cli, 'hydra-debug', docker_image=docker_image)
+
     write_plugins(plugins, app_name)
