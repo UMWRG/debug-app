@@ -31,23 +31,23 @@ def start_cli():
 @click.option('--fail', default=False)
 @click.option('--data-dir', default='/tmp')
 def do_export(obj, network_id, scenario_id, dummy1, dummy2, dummy3, switch_on, fail, data_dir):
-
     exporter.do_export(network_id, scenario_id, dummy1, dummy2, dummy3, switch_on, fail, data_dir)
 
 @hydra_app(category='import', name="Debug Import")
 @cli.command(name='import')
 @click.pass_obj
 @click.option('-p',  '--project-id', help='Project ID')
-@click.option('-f', '--data-file', help="Data File")
+@click.option('-f1', '--data-file-1', help="Data File 1")
+@click.option('-f2', '--data-file-2', help="Data File 2")
 @click.option('-d1', '--dummy1', help='Dummy1 (String)')
 @click.option('-d2', '--dummy2', help='Dummy2 (Number)')
 @click.option('-d3', '--dummy3', help='Dummy3 (Number)')
 @click.option('--switch-on', default=False)
 @click.option('--fail', default=False)
 @click.option('--data-dir', default='/tmp')
-def do_import(obj, project_id, data_file, dummy1, dummy2, dummy3, switch_on, fail, data_dir):
+def do_import(obj, project_id, dummy1, dummy2, dummy3, switch_on, fail, data_dir, data_file_1=None, data_file_2=None):
 
-    importer.do_import(project_id, data_file, dummy1, dummy2, dummy3, switch_on, fail, data_dir)
+    importer.do_import(project_id, dummy1, dummy2, dummy3, switch_on, fail, data_dir, data_file_1=data_file_1, data_file_2=data_file_2)
 
 @hydra_app(category='model', name="Debug Run")
 @cli.command(name='run')
