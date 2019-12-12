@@ -26,7 +26,7 @@
         },
         "hydra-debug": {
             "git": "https://github.com/UMWRG/debug-app.git",
-            "ref": "9d519626274c7618595184c2228c7a195ab25a40"
+            "ref": "7ba969d7d41aabf678b9466a6a2c155207473d92"
         }
     },
     "develop": {}
