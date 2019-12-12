@@ -2,6 +2,7 @@ from time import sleep, time
 from hydra_client import write_progress, write_output
 import multiprocessing
 from random import randint
+import os
 
 class Object(object):
     pass
