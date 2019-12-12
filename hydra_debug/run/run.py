@@ -27,12 +27,16 @@ class Runner(object):
         path=os.path.dirname(data_file)
         while path != "":
             write_output(path)
+            if os.path.isfile(path):
+                write_output(f"The provided path ''{path}'' is a file!")
+            elif os.path.isdir(path):
+                write_output(f"The provided path ''{path}'' is a folder!")
+            else:
+                write_output(f"The provided path ''{path}'' is not a file nor a folder!")
             new_path=os.path.dirname(path)
             if new_path == path:
                 break
             path=new_path
-        # if not os.path.isfile(data_file_1):
-        #     raise Exception(f"The provided filepath 1 ''{data_file_1}'' does not exists")
 
     def wait(self, timeout):
         write_output("Waiting {0} seconds".format(timeout))
