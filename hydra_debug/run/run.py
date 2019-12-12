@@ -30,7 +30,7 @@ class Runner(object):
             new_path=os.path.dirname(path)
             if new_path == path:
                 break
-            new_path=path
+            path=new_path
         # if not os.path.isfile(data_file_1):
         #     raise Exception(f"The provided filepath 1 ''{data_file_1}'' does not exists")
 
