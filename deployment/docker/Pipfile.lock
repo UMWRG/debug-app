@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0ca465d14d5635470f33a08b4a0ee9bf323438dff58f02ef339fb0d3510066ce"
+            "sha256": "da47d648398bbcbe6b553acb8da297bed590a005d680f2d5643e3c76293399c6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -26,7 +26,7 @@
         },
         "hydra-debug": {
             "git": "https://github.com/UMWRG/debug-app.git",
-            "ref": "770f7072177ecf2a7f84c95deb879d13d5b94f08"
+            "ref": "696c9d9814ed5eb63b192a0d2ff7f347aad9205e"
         }
     },
     "develop": {}
