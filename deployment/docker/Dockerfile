@@ -24,6 +24,10 @@ RUN python3.6 -m pip install wheel
 COPY . /app
 WORKDIR /app
 
+#Tell docker to expect these arguments, and make them available to the install.sh script.
+ARG SSH_PRIVATE_KEY
+ARG SSH_KNOWN_HOSTS
+
 RUN chmod 755 install.sh
 RUN ./install.sh
 
