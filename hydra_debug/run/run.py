@@ -3,6 +3,7 @@ from hydra_client import write_progress, write_output
 import multiprocessing
 from random import randint
 import os
+from pathlib import Path
 
 class Object(object):
     pass
@@ -31,6 +32,7 @@ class Runner(object):
                 write_output(f"The provided path ''{path}'' is a file!")
             elif os.path.isdir(path):
                 write_output(f"The provided path ''{path}'' is a folder!")
+                print(*Path(path).iterdir(), sep="\n")
             else:
                 write_output(f"The provided path ''{path}'' is not a file nor a folder!")
             new_path=os.path.dirname(path)
