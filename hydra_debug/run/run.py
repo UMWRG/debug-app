@@ -6,18 +6,25 @@ from random import randint
 class Object(object):
     pass
 
-def do_run(network_id, timeout=5, fail=False, heavy_load=False):
+def do_run(network_id, timeout=5, fail=False, heavy_load=False, data_file=None):
     runner = Runner(network_id)
     if heavy_load is True:
         runner.do_heavy_load()
     elif fail is True:
         runner.fail()
+    elif data_file is not None:
+        runner.manage_file(data_file)
     else:
         runner.wait(timeout)
 
 class Runner(object):
     def __init__(self, network_id = 0):
         self.network_id = network_id
+
+    def manage_file(self, data_file):
+        write_output(data_file)
+        # if not os.path.isfile(data_file_1):
+        #     raise Exception(f"The provided filepath 1 ''{data_file_1}'' does not exists")
 
     def wait(self, timeout):
         write_output("Waiting {0} seconds".format(timeout))
