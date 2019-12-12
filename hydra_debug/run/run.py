@@ -23,6 +23,13 @@ class Runner(object):
 
     def manage_file(self, data_file):
         write_output(data_file)
+        path=os.path.dirname(data_file)
+        while path != "":
+            write_output(path)
+            new_path=os.path.dirname(path)
+            if new_path == path:
+                break
+            new_path=path
         # if not os.path.isfile(data_file_1):
         #     raise Exception(f"The provided filepath 1 ''{data_file_1}'' does not exists")
 
