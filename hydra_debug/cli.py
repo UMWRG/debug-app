@@ -53,7 +53,7 @@ def do_import(obj, project_id, dummy1, dummy2, dummy3, switch_on, fail, data_dir
 @cli.command(name='run')
 @click.pass_obj
 @click.option('-n',  '--network-id', help='Network ID')
-@click.option('-f1', '--data-file-1', help="Data File 1")
+@click.option('-f', '--data-file', help="Data File")
 @click.option('-t', '--timeout', default=5, help='How log to sleep for')
 @click.option('--fail', 'fail', flag_value=True)
 @click.option('--heavy-load', 'heavy_load', flag_value=True)
