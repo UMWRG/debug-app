@@ -7,7 +7,7 @@ verify_ssl = true
 
 [packages]
 hydra-base = {git = "https://github.com/hydraplatform/hydra-base.git",ref = "master"}
-hydra-debug = {git = "https://github.com/UMWRG/debug-app.git",ref = "master"}
+hydra-debug = {git = "https://github.com/UMWRG/debug-app.git",ref = "unified-deployment-flow"} # master
 hydra-client-python = {git = "https://github.com/hydraplatform/hydra-client-python.git",ref = "master"}
 
 [requires]
