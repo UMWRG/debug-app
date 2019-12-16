@@ -22,14 +22,16 @@ def do_import(project_id, dummy1, dummy2, dummy3, switch_on, fail, data_dir, dat
 
     files.append(data_file_2)
 
-
+    print("Iterating files")
     for file in files:
         #Read the supplied file and save it to data_dir
         with open(file, 'r') as infile:
 
             filename = infile.name.split(os.sep)[-1]
+            print(f"Read opening {filename}")
 
             outfile_path = os.path.join(data_dir, filename)
+            print(f"Write opening {outfile_path}")
 
             with open(outfile_path, 'w') as outfile:
                 outfile.write(infile.read())
