@@ -18,15 +18,15 @@
     "default": {
         "hydra-base": {
             "git": "https://github.com/hydraplatform/hydra-base.git",
-            "ref": "387cd3596c2c8b5914b6b10519fe3817a21f0eed"
+            "ref": "e32d108044766b0af4ad58f229fad5a9979eae84"
         },
         "hydra-client-python": {
             "git": "https://github.com/hydraplatform/hydra-client-python.git",
-            "ref": "4097cbbfdb1729c4660aa16fa0042b0112977344"
+            "ref": "d37cc517494a7bfdcb5c4f94d045a2066186b290"
         },
         "hydra-debug": {
             "git": "https://github.com/UMWRG/debug-app.git",
-            "ref": "8f719f675a7783345a9509b496f25ac092c3ed38"
+            "ref": "81e3b07bd58e4c85cb87fd3d7360012368f87f1b"
         }
     },
     "develop": {}
