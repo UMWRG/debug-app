@@ -1,10 +1,11 @@
 import os
+from hydra_client import write_progress, write_output
 import logging
 LOG = logging.getLogger(__name__)
 
 def do_import(project_id, data_file, dummy1, dummy2, dummy3, switch_on, fail, data_dir):
     msg = "Importing data"
-    write_output("[out] %s", msg)
+    write_output("[out] %s"% msg)
     LOG.info("[log] %s", msg)
     if data_file is None:
         raise Exception("No file specified")
@@ -20,5 +21,5 @@ def do_import(project_id, data_file, dummy1, dummy2, dummy3, switch_on, fail, da
             outfile.write(infile.read())
 
     msg = "Data Imported"
-    write_output("[out] %s", msg)
+    write_output("[out] %s"% msg)
     LOG.info("[log] %s", msg)
