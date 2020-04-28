@@ -9,11 +9,13 @@ class Object(object):
     pass
 
 def do_run(network_id, timeout=5, fail=False, heavy_load=False):
+
     msg = "Calling Runner"
     write_output("[out] %s"%msg)
     LOG.info("[log] %s", msg)
 
-    runner = Runner()
+    runner = Runner(network_id)
+
     if heavy_load is True:
         runner.do_heavy_load()
     elif fail is True:
@@ -26,8 +28,8 @@ def do_run(network_id, timeout=5, fail=False, heavy_load=False):
     LOG.info("[log] %s", msg)
 
 class Runner(object):
-    def __init__(self):
-        pass
+    def __init__(self, network_id = 0):
+        self.network_id = network_id
 
     def wait(self, timeout):
         msg = "Waiting {0} seconds".format(timeout)
@@ -46,7 +48,7 @@ class Runner(object):
         msg = "Forcing a user-defined failure"
         write_output("[out] %s"%msg)
         LOG.info("[log] %s", msg)
-        raise Exception("User-forced failure")
+        raise Exception("[Network ID: {}] - User-forced failure".format(self.network_id))
 
     def do_heavy_load(self):
         msg = "Doing a heavy load"
@@ -59,7 +61,7 @@ class Runner(object):
             process.name = "process_{}".format(i)
 
             processes.append(multiprocessing.Process(name=process.name,
-                                                     target=self._run_process,
+                                                     target=self._run_loop_process,
                                                      args=(process,)))
 
         for p in processes:
@@ -72,7 +74,7 @@ class Runner(object):
         write_output("[out] %s"%msg)
         LOG.info("[log] %s", msg)
 
-    def _run_process(self, process=None):
+    def _run_loop_process(self, process=None):
         write_output("v.0.2 - Running "+ str(process.name))
         a=0
         st=100000000
@@ -88,6 +90,8 @@ class Runner(object):
                 write_progress(a, limit)
                 start_time=current_time
 
-        msg = "End Process {} for a total of {} cycles".format(str(process.name),a)
+        msg = "[Network ID: {}] End Process {} for a total of {} cycles".format(
+            self.network_id, str(process.name),a)
+
         write_output("[out] %s"%msg)
         LOG.info("[log] %s", msg)
